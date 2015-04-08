@@ -1,6 +1,9 @@
-{ 
-   "scenes" : [ "Scene1"],
-   "files" : [],
-   "theme" : "base",
-	"modules" : [ "ime" ]
+{
+ "scenes": [
+  "Scene1",
+  "Scene2"
+ ],
+ "files": [],
+ "theme": "base",
+ "modules": ["ime"]
 }
