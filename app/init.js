@@ -116,6 +116,32 @@ alert("init.js loaded.");
 		});
 
 
+		SceneScene1.prototype.handleKeyDown = function (keyCode) {
+			alert("SceneScene1.handleKeyDown(" + keyCode + ")");
+			// TODO : write an key event handler when this scene get focued
+			switch (keyCode) {
+				case sf.key.LEFT:
+					setCurrent(x,y-1);
+					break;
+				case sf.key.RIGHT:
+					setCurrent(x,y+1);
+					break;
+				case sf.key.UP:
+					setCurrent(x-1,y);
+					break;
+				case sf.key.DOWN:
+					setCurrent(x+1,y);
+					break;
+				case sf.key.ENTER:
+					alert(current.attr('href'));
+					break;
+				default:
+					alert("handle default key event, key code(" + keyCode + ")");
+					break;
+			}
+		};
+
+
 		return this;
 	}
 

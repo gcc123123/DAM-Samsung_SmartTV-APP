@@ -23,9 +23,9 @@ SceneScene1.prototype.initialize = function () {
 	  		if(i == 11) $("#movies").append('<div class="row">');
 	  		if(i == 5) $("#movies").append('</div><div class="row">');
 	  		if(i == 0) $("#movies").append('</div>');
-	  		$("#movies").append('<div class="col-xs-2" href="details.html#'+data.results[i].id+'"><img src="'+base_url+'w342'+data.results[i].poster_path+'"/></div>');
+	  		$("#movies").append('<div class="col-xs-2" href="'+data.results[i].id+'"><img src="'+base_url+'w342'+data.results[i].poster_path+'"/></div>');
 	  	}
-	  	//$('#movies div.col-xs-2').keynav();
+	  	$('#movies div.col-xs-2').keynav();
 	  },
 	  error: function(){
 	  	alert('error');
@@ -54,22 +54,6 @@ SceneScene1.prototype.handleBlur = function () {
 	// this function will be called when the scene manager move focus to another scene from this scene
 };
 
-SceneScene1.prototype.handleKeyDown = function (keyCode) {
-	alert("SceneScene1.handleKeyDown(" + keyCode + ")");
-	// TODO : write an key event handler when this scene get focued
-	switch (keyCode) {
-		case sf.key.LEFT:
-			break;
-		case sf.key.RIGHT:
-			break;
-		case sf.key.UP:
-			break;
-		case sf.key.DOWN:
-			break;
-		case sf.key.ENTER:
-			break;
-		default:
-			alert("handle default key event, key code(" + keyCode + ")");
-			break;
-	}
-};
+
+
+
