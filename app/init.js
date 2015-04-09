@@ -145,6 +145,23 @@ alert("init.js loaded.");
 			}
 		};
 
+		SceneScene2.prototype.handleKeyDown = function (keyCode) {
+			alert("SceneScene2.handleKeyDown(" + keyCode + ")");
+			// TODO : write an key event handler when this scene get focued
+			switch (keyCode) {
+				case sf.key.RETURN:
+					event.preventDefault();
+					movie_id = '';
+					sf.scene.hide('Scene2');
+					sf.scene.show('Scene1');
+					sf.scene.focus('Scene1');
+					break;
+				default:
+					alert("handle default key event, key code(" + keyCode + ")");
+					break;
+			}
+		};
+
 
 		return this;
 	}
