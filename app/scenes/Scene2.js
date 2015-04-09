@@ -9,6 +9,20 @@ SceneScene2.prototype.initialize = function () {
 	// this function will be called only once when the scene manager show this scene first time
 	// initialize the scene controls and styles, and initialize your variables here
 	// scene HTML and CSS will be loaded before this function is called
+	$.ajax({
+	  type: "GET",
+	  crossDomain: true,
+	  async: true,
+	  dataType: "json",
+	  url: API+'/movie/'+movie_id,
+	  data: { api_key: api_key },
+	  success: function(data){
+	  	$("#details").css('background-image', 'url(' + base_url+'w1280'+data.backdrop_path + ')');
+	  	$("#cover").append('<img src="'+base_url+'w342'+data.poster_path+'"/>');
+	  	$("#title").append('<h1>'+data.title+'</h1>');
+	  	$("#title").append('<h2>'+data.tagline+'</h2>');
+	  	$("#sinopsis").append(data.overview);	  }
+	});
 
 };
 

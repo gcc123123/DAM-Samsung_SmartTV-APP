@@ -2,6 +2,7 @@ var API = 'http://api.themoviedb.org/3';
 var api_key = 'fffcfc6228ea5f968c308ea249b5a9eb';
 var session_id = '';
 var base_url = 'http://image.tmdb.org/t/p/';
+var movie_id = '';
 
 function onStart () {
 	// TODO : Add your Initilize code here
@@ -133,7 +134,10 @@ alert("init.js loaded.");
 					setCurrent(x+1,y);
 					break;
 				case sf.key.ENTER:
-					alert(current.attr('href'));
+					movie_id = current.attr('href');
+					sf.scene.hide('Scene1');
+					sf.scene.show('Scene2');
+					sf.scene.focus('Scene2');
 					break;
 				default:
 					alert("handle default key event, key code(" + keyCode + ")");
