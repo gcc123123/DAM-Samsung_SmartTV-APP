@@ -48,3 +48,9 @@
 	font-size: 1.6em;
 	margin-bottom: 40px;
 }
+
+.puntua {
+	text-align: center;
+	color: #999;
+	text-transform: uppercase;
+}

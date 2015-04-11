@@ -69,3 +69,17 @@ SceneScene2.prototype.handleKeyDown = function (keyCode) {
 			break;
 	}
 };
+
+function puntuar (puntuacion) {
+	$.ajax({
+	  type: "POST",
+	  crossDomain: true,
+	  async: true,
+	  dataType: "json",
+	  url: API+'/movie/'+id+'/rating',
+	  data: { api_key: api_key, session_id: session_id, value: puntuacion },
+	  success: function(data){
+	  	console.log(data);
+	  }
+	});
+};
