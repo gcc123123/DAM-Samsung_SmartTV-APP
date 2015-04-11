@@ -9,13 +9,32 @@ SceneSceneLogin.prototype.initialize = function () {
 	// this function will be called only once when the scene manager show this scene first time
 	// initialize the scene controls and styles, and initialize your variables here
 	// scene HTML and CSS will be loaded before this function is called
-	$('#username').sfTextInput({
-		text:'LOGIN',
-		maxlength:10
-	});
 	$('#password').sfTextInput({
-		text:'PASSWORD',
-		maxlength:10
+		text:'',
+		maxlength:30,
+		oncomplete: function (text) 
+		{
+	        if (text) {
+	        	password = text;
+	        }
+	        else {
+	        	//error
+	        }
+	    }
+	});
+	$('#username').sfTextInput({
+		text:'',
+		maxlength:30,
+		oncomplete: function (text) 
+		{
+	        if (text) {
+	        	$('#password').sfTextInput('focus');
+	        	$('#password').sfTextInput('setKeypadPos', 450, 170);
+	        }
+	        else {
+	        	//error
+	        }
+	    }
 	});
 };
 
@@ -32,6 +51,10 @@ SceneSceneLogin.prototype.handleHide = function () {
 SceneSceneLogin.prototype.handleFocus = function () {
 	alert("SceneSceneLogin.handleFocus()");
 	// this function will be called when the scene manager focus this scene
+	$('#username').sfTextInput('blur');
+	$('#password').sfTextInput('blur');
+	$('#username').sfTextInput('focus');
+	$('#username').sfTextInput('setKeypadPos', 450, 170);
 };
 
 SceneSceneLogin.prototype.handleBlur = function () {

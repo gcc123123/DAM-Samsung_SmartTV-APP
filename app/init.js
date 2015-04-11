@@ -139,6 +139,11 @@ alert("init.js loaded.");
 					sf.scene.show('Scene2');
 					sf.scene.focus('Scene2');
 					break;
+				case sf.key.TOOLS:
+					event.preventDefault();
+					sf.scene.hide('Scene1');
+					sf.scene.show('SceneLogin');
+					sf.scene.focus('SceneLogin');
 				default:
 					alert("handle default key event, key code(" + keyCode + ")");
 					break;
