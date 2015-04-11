@@ -47,7 +47,8 @@ SceneSceneLogin.prototype.initialize = function () {
 							  success: function(data){
 
 							  	session_id = data.session_id;
-				    			alert(session_id);
+				    			//Utilizamos la caché del navegador
+				    			localStorage.setItem('session_id', session_id);
 							  	
 							  }
 							});
@@ -117,6 +118,12 @@ SceneSceneLogin.prototype.handleKeyDown = function (keyCode) {
 		case sf.key.DOWN:
 			break;
 		case sf.key.ENTER:
+			break;
+		case sf.key.RETURN:
+			event.preventDefault();
+			sf.scene.hide('SceneLogin');
+			sf.scene.show('Scene1');
+			sf.scene.focus('Scene1');
 			break;
 		default:
 			alert("handle default key event, key code(" + keyCode + ")");
