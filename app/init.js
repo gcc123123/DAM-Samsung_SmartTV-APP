@@ -107,7 +107,21 @@ alert("init.js loaded.");
 			x=i;
 			y=j;
 		}
-
+		//hide row number n
+		function hideRow(n){
+			for(i=0; i< 6 ; i++){
+				$(matrix[n][i]).addClass("hide");
+			}
+			alert("hide Row " + n);
+		}
+		// show row number n
+		function unHideRow(n){
+			for(i=0; i< 6 ; i++){
+				$(matrix[n][i]).removeClass("hide");
+			}
+			alert("unhide Row" + n);
+		}
+		
 		$(window).bind("resize", function(event) {
 			update();
 		});
@@ -116,7 +130,12 @@ alert("init.js loaded.");
 			update();
 		});
 
-
+		//*********************   scroll up/down effect variable     ********************//
+		var topRow = 0;		// actual visible top row position
+		var buttomRow = 1; // actual visible buttom row number 
+		var maxRow = 3;    // max number of rows.
+		//*********************  end scroll up/down effect variable     ********************//
+		
 		SceneScene1.prototype.handleKeyDown = function (keyCode) {
 			alert("SceneScene1.handleKeyDown(" + keyCode + ")");
 			// TODO : write an key event handler when this scene get focued
@@ -128,10 +147,29 @@ alert("init.js loaded.");
 					setCurrent(x,y+1);
 					break;
 				case sf.key.UP:
-					setCurrent(x-1,y);
+					if( (x-1) >= 0 ){
+						//*********************   scroll up effect     ********************//
+						if(topRow == x){
+							topRow--;
+							unHideRow(topRow);
+							buttomRow--;
+						}
+						//*********************** end scroll up effect    ********************//
+						setCurrent(x-1,y);
+					}
 					break;
 				case sf.key.DOWN:
-					setCurrent(x+1,y);
+					if(x < maxRow){
+						//*********************   scroll down effect     ********************//
+						if( buttomRow < x+1 ){
+							hideRow(topRow);
+							topRow++;
+							buttomRow++;
+						}
+						//*********************  end scroll up effect     ********************//
+						
+						setCurrent(x+1,y);
+					}
 					break;
 				case sf.key.ENTER:
 					movie_id = current.attr('href');

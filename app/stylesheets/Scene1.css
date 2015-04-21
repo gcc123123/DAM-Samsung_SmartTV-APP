@@ -21,7 +21,10 @@
 	margin: 0;
 	margin-bottom: 20px;
 }
-
+#movies hide{
+	display:none;
+	
+}
 #movies img {
 	width: 100%;
 	margin-top: 10px;
