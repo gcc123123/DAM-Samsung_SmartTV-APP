@@ -3,6 +3,9 @@ var api_key = 'fffcfc6228ea5f968c308ea249b5a9eb';
 var session_id = '';
 var base_url = 'http://image.tmdb.org/t/p/';
 var movie_id = '';
+var tipo_url='';
+var arr = Array();
+var num;
 
 function onStart () {
 	// TODO : Add your Initilize code here
@@ -107,21 +110,7 @@ alert("init.js loaded.");
 			x=i;
 			y=j;
 		}
-		//hide row number n
-		function hideRow(n){
-			for(i=0; i< 6 ; i++){
-				$(matrix[n][i]).addClass("hide");
-			}
-			alert("hide Row " + n);
-		}
-		// show row number n
-		function unHideRow(n){
-			for(i=0; i< 6 ; i++){
-				$(matrix[n][i]).removeClass("hide");
-			}
-			alert("unhide Row" + n);
-		}
-		
+
 		$(window).bind("resize", function(event) {
 			update();
 		});
@@ -130,12 +119,7 @@ alert("init.js loaded.");
 			update();
 		});
 
-		//*********************   scroll up/down effect variable     ********************//
-		var topRow = 0;		// actual visible top row position
-		var buttomRow = 1; // actual visible buttom row number 
-		var maxRow = 3;    // max number of rows.
-		//*********************  end scroll up/down effect variable     ********************//
-		
+
 		SceneScene1.prototype.handleKeyDown = function (keyCode) {
 			alert("SceneScene1.handleKeyDown(" + keyCode + ")");
 			// TODO : write an key event handler when this scene get focued
@@ -147,37 +131,20 @@ alert("init.js loaded.");
 					setCurrent(x,y+1);
 					break;
 				case sf.key.UP:
-					if( (x-1) >= 0 ){
-						//*********************   scroll up effect     ********************//
-						if(topRow == x){
-							topRow--;
-							unHideRow(topRow);
-							buttomRow--;
-						}
-						//*********************** end scroll up effect    ********************//
-						setCurrent(x-1,y);
-					}
+					setCurrent(x-1,y);
 					break;
 				case sf.key.DOWN:
-					if(x < maxRow){
-						//*********************   scroll down effect     ********************//
-						if( buttomRow < x+1 ){
-							hideRow(topRow);
-							topRow++;
-							buttomRow++;
-						}
-						//*********************  end scroll up effect     ********************//
-						
-						setCurrent(x+1,y);
-					}
+					setCurrent(x+1,y);
 					break;
 				case sf.key.ENTER:
 					movie_id = current.attr('href');
+					tipo_url = current.attr('tipo_url');
 					sf.scene.hide('Scene1');
 					sf.scene.show('Scene2');
 					sf.scene.focus('Scene2');
 					break;
 				case sf.key.TOOLS:
+					num=Math.floor(Math.random()*12);
 					event.preventDefault();
 					sf.scene.hide('Scene1');
 					sf.scene.show('SceneLogin');
@@ -214,6 +181,45 @@ alert("init.js loaded.");
 				case sf.key.N5:
 					puntuar(5*2);
 					break;
+				case sf.key.BLUE:
+					if(tipo_url!='Serie'){
+					sf.scene.show('Trailer');
+					sf.scene.focus('Trailer');
+					}
+					alert('pulsado boton azul');				
+				default:
+					alert("handle default key event, key code(" + keyCode + ")");
+					break;
+			}
+		};
+		
+		SceneTrailer.prototype.handleKeyDown = function (keyCode) {
+			alert("SceneScene2.handleKeyDown(" + keyCode + ")");
+			// TODO : write an key event handler when this scene get focued
+			switch (keyCode) {
+				case sf.key.RETURN:
+					$("#video").html('');
+					event.preventDefault();
+					sf.scene.hide('Trailer');
+					sf.scene.show('Scene2');
+					sf.scene.focus('Scene2');
+					break;
+				case sf.key.N1:
+					
+					break;
+				case sf.key.N2:
+					
+					break;
+				case sf.key.N3:
+					
+					break;
+				case sf.key.N4:
+					
+					break;
+				case sf.key.N5:
+					
+					break;
+
 				default:
 					alert("handle default key event, key code(" + keyCode + ")");
 					break;

@@ -6,6 +6,7 @@ function SceneScene2() {
 
 SceneScene2.prototype.initialize = function () {
 	alert("SceneScene2.initialize()");
+
 	// this function will be called only once when the scene manager show this scene first time
 	// initialize the scene controls and styles, and initialize your variables here
 	// scene HTML and CSS will be loaded before this function is called
@@ -13,22 +14,49 @@ SceneScene2.prototype.initialize = function () {
 };
 
 SceneScene2.prototype.handleShow = function (data) {
+	$("#cover").html('');
+	$("#title").html('');
+	$("#title").html('');
+	$("#sinopsis").html('');
 	alert("SceneScene2.handleShow()");
 	// this function will be called when the scene manager show this scene
+	if(tipo_url!='Serie'){
 	$.ajax({
 	  type: "GET",
 	  crossDomain: true,
 	  async: true,
 	  dataType: "json",
 	  url: API+'/movie/'+movie_id,
-	  data: { api_key: api_key },
+	  data: { api_key: api_key , language: 'es'},
 	  success: function(data){
 	  	$("#details").css('background-image', 'url(' + base_url+'w1280'+data.backdrop_path + ')');
 	  	$("#cover").append('<img src="'+base_url+'w342'+data.poster_path+'"/>');
 	  	$("#title").append('<h1>'+data.title+'</h1>');
+	  	$("#title").append('<h2>'+data.release_date+' '+'(Puntuación: '+data.vote_average/2+'/5)'+'</h2>');
 	  	$("#title").append('<h2>'+data.tagline+'</h2>');
-	  	$("#sinopsis").append(data.overview);	  }
-	});
+	  	$("#sinopsis").append(data.overview);
+	  	$("#col-xs-12 botazul").append('prueba');}
+	  	
+	});	
+	}else{
+		$.ajax({
+			  type: "GET",
+			  crossDomain: true,
+			  async: true,
+			  dataType: "json",
+			  url: API+'/tv/'+movie_id,
+			  data: { api_key: api_key, language: 'es' },
+			  success: function(data){
+			  	$("#details").css('background-image', 'url(' + base_url+'w1280'+data.backdrop_path + ')');
+			  	$("#cover").append('<img src="'+base_url+'w342'+data.poster_path+'"/>');
+			  	$("#title").append('<h1>'+data.name+'</h1>');
+			  	$("#title").append('<h2>'+data.first_air_date+' '+'(Puntuación: '+data.vote_average/2+'/5)'+'</h2>');
+			  	$("#sinopsis").append(data.overview);	
+			  								  }
+			});	
+			
+	}
+	//$("#col-xs-12 botazul").css('display','none');
 };
 
 SceneScene2.prototype.handleHide = function () {

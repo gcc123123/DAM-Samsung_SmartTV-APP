@@ -49,8 +49,24 @@
 	margin-bottom: 40px;
 }
 
+#sinopsis{
+	text-align: justify;
+}
+
 .puntua {
-	text-align: center;
+	margin-left: 535px;
+	margin-bottom: 5px;
+	margin-top: 10px;
+	/*text-align: center;*/
+	color: #999;
+	text-transform: uppercase;
+}
+
+.botazul {
+	margin-left: 535px;
+	margin-bottom: 5px;
+	margin-top: 10px;
+	/*text-align: center;*/
 	color: #999;
 	text-transform: uppercase;
 }
