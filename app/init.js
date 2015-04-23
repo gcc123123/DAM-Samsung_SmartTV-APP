@@ -120,6 +120,77 @@ alert("init.js loaded.");
 		});
 
 
+		//*********************   scroll up/down effect global variable and function    ********************//
+		var topRow = 0;		// actual visible top row position
+		var buttomRow = 1; // actual visible buttom row number 
+		var maxRow = max_index_number;//4;    // max number of rows.
+		function unhideTitle(title){
+			document.getElementById("t"+title).style.display="";
+		}
+		function hideTitle(title){
+			document.getElementById("t"+title).style.display="none";
+			/*var title ;
+			switch(title){
+			case 0:
+				//title = $.filter('t0');
+				//title.addClass("hide");
+				
+				//$("#movies.titulo").eq(title).addClass("hide");
+			//	document.getElementsByName("t0").style.display="none";
+			//	document.getElementsByTagName("t0").style.display="none";
+				//document.getElementById("t0").style.display="none";
+				
+				//$("#movies.titulo").eq(title+1).addClass("hide");
+				//$("#movies").$("titulo").eq(title);
+				alert("[debug] -------------------------------  hide title " + title);
+				break;
+			case 1:
+				//title = this.filter('.t1');
+				break;
+			case 2:
+				title = this.filter('.selected');
+				break;
+			case 3:
+				title = this.filter('.selected');
+				break;
+			case 4:
+				title = this.filter('.selected');
+				break;
+			
+			}*/
+		}
+		function hideRow(n){
+			//document.getElementById("r0").style.display="none";
+			//$("r0").show().hide();
+			
+			for(i=0; i <6 ; i++){
+				$(matrix[n][i]).addClass("hide");
+				
+			}
+			//hideTitle(n);
+			//hide title
+			document.getElementById("t"+n).style.display="none";
+			alert("-----------------hide titile id = t" + n);
+			//hide space
+			document.getElementById("d"+n).style.display="none";
+			document.getElementById("dd"+n).style.display="none";
+			alert("hide row" + n);
+		}
+		function unHideRow(n){
+			for(i=0; i <6 ; i++){
+				$(matrix[n][i]).removeClass("hide");
+			}
+			//unhideTitle(n);
+
+			document.getElementById("t"+n).style.display="";
+			
+			document.getElementById("d"+n).style.display="";
+			document.getElementById("dd"+n).style.display="";
+			alert("unhide row" + n);
+		}
+		
+		//*********************  end scroll up/down effect global variable and funtion    ********************//
+		
 		SceneScene1.prototype.handleKeyDown = function (keyCode) {
 			alert("SceneScene1.handleKeyDown(" + keyCode + ")");
 			// TODO : write an key event handler when this scene get focued
@@ -131,10 +202,29 @@ alert("init.js loaded.");
 					setCurrent(x,y+1);
 					break;
 				case sf.key.UP:
-					setCurrent(x-1,y);
+					if( (x-1) >= 0 ){
+						//*********************   scroll up effect     ********************//
+						if(topRow == x){
+							topRow--;
+							unHideRow(topRow);
+							buttomRow--;
+						}
+						//*********************** end scroll up effect    ********************//
+						setCurrent(x-1,y);
+					}
 					break;
 				case sf.key.DOWN:
-					setCurrent(x+1,y);
+					if(x < maxRow){
+						//*********************   scroll down effect     ********************//
+						if( buttomRow < x+1 ){
+							hideRow(topRow);
+							topRow++;
+							buttomRow++;
+						}
+						//*********************  end scroll up effect     ********************//
+						
+						setCurrent(x+1,y);
+					}
 					break;
 				case sf.key.ENTER:
 					movie_id = current.attr('href');
